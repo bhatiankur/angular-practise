@@ -7,18 +7,18 @@ import { Product } from './product.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';  
+  title = 'app';
   products: Array<Product>;
   constructor(){
-    this.products = [new Product('NICE', 'A very nice hat', 
+    this.products = [new Product('0NICE', 'A very nice hat',
     'http://lorempixel.com/400/200', ['Men', 'Accessories', 'Hat'], 29.99),
-    new Product('NICE!', 'A very very nice hat', 
+    new Product('1ICE', 'A very very nice hat',
     'http://lorempixel.com/400/200', ['Women', 'Accessories', 'Hat'], 39.99),
-    new Product('NICE!!', 'A very very very nice hat', 
+    new Product('2ICE', 'A very very very nice hat',
     'http://lorempixel.com/400/200', ['Chilren', 'Accessories', 'Hat'], 49.99)];
   }
   productWasSelected(product: Product): void {
-    console.log('Product Selected ' + product);
+    console.log('Product Selected ' + product.name);
   }
 
 }

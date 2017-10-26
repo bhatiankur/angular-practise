@@ -1,3 +1,8 @@
-<p>
-  product-list-component works!
-</p>
+<div class="ui items">
+  <product-row
+    *ngFor="let product of productList"
+      [product]="product"
+      (click)='clicked(product)'
+      [class.selected]="true">
+  </product-row>
+</div>

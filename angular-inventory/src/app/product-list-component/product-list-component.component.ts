@@ -12,21 +12,23 @@ export class ProductListComponentComponent implements OnInit {
   @Output() onProductSelected: EventEmitter<Product>;
 
   private currentProduct: Product;
-  
-  constructor() { 
+
+  constructor() {
       this.onProductSelected = new EventEmitter();
   }
 
   clicked(product: Product): void {
     this.currentProduct = product;
-    this.onProductSelected.emit(product); 
+    this.onProductSelected.emit(product);
   }
 
   isSelected(product: Product): boolean {
     if(!product || !this.currentProduct){
       return false;
     }
-    return product.sku === this.currentProduct.sku;
+    console.log('Something is selected..');
+    console.log(product.sku == this.currentProduct.sku);
+    return product.sku == this.currentProduct.sku;
   }
 
   ngOnInit() {
