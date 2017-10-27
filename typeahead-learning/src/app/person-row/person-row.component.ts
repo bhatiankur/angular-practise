@@ -8,9 +8,19 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class PersonRowComponent implements OnInit {
 
   @Input() person: any;
+  isDeletable: boolean;
+  @Input() isHeaderRow: boolean;
+  @Input() headerLabels: Array<string>;
+
   constructor() {}
 
   ngOnInit() {
+    if(this.person != undefined){
+      this.isDeletable = this.person.isDeletable;
+    }
+
+    console.log('Person recieved ' + this.person._index );
+
   }
 
   deletePerson(person: any): boolean{

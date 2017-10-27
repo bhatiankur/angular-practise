@@ -6,12 +6,14 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { TypeaheadPersonComponent } from './typeahead-person/typeahead-person.component';
 import { PersonRowComponent } from './person-row/person-row.component';
+import { PersonListComponent } from './person-list/person-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TypeaheadPersonComponent,
-    PersonRowComponent
+    PersonRowComponent,
+    PersonListComponent
   ],
   imports: [
     BrowserModule,

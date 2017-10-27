@@ -1,0 +1,12 @@
+<app-person-row [person]='' [isHeaderRow]="true" [headerLabels]="['LinkedAccounts','Available']"></app-person-row>
+
+<div *ngFor="let r of list">
+  <app-person-row [person]=r></app-person-row>
+</div>
+
+<app-person-row [person]='' [isHeaderRow]="true" [headerLabels]="['OtherAccounts','Bank','Delete']"></app-person-row>
+
+
+
+
+

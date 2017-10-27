@@ -4,13 +4,17 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import {NgbTypeaheadSelectItemEvent} from "@ng-bootstrap/ng-bootstrap";
 
+const header1 = {'isHeader' : 'true', 'headerLabels' : ['headerLabel1','headerLabel2']};
+
+const header2 = {'isHeader' : 'true', 'headerLabels' : ['headerLabel3','headerLabel4','headerLabel5']};
+
 const statesWithFlags = [
-  {'name': 'Alabama', 'flag': '5/5c/Flag_of_Alabama.svg/45px-Flag_of_Alabama.svg.png'},
-  {'name': 'Alaska', 'flag': 'e/e6/Flag_of_Alaska.svg/43px-Flag_of_Alaska.svg.png'},
-  {'name': 'Arizona', 'flag': '9/9d/Flag_of_Arizona.svg/45px-Flag_of_Arizona.svg.png'},
-  {'name': 'Arkansas', 'flag': '9/9d/Flag_of_Arkansas.svg/45px-Flag_of_Arkansas.svg.png'},
-  {'name': 'California', 'flag': '0/01/Flag_of_California.svg/45px-Flag_of_California.svg.png'},
-  {'name': 'Colorado', 'flag': '4/46/Flag_of_Colorado.svg/45px-Flag_of_Colorado.svg.png'},
+  {'name': 'Alabama', 'flag': '5/5c/Flag_of_Alabama.svg/45px-Flag_of_Alabama.svg.png', 'isDeletable' : true , 'type' : 'contact'},
+  {'name': 'Alaska', 'flag': 'e/e6/Flag_of_Alaska.svg/43px-Flag_of_Alaska.svg.png', 'type' : 'subordinate'},
+  {'name': 'Arizona', 'flag': '9/9d/Flag_of_Arizona.svg/45px-Flag_of_Arizona.svg.png', 'type' : 'subordinate'},
+  {'name': 'Arkansas', 'flag': '9/9d/Flag_of_Arkansas.svg/45px-Flag_of_Arkansas.svg.png', 'type' : 'subordinate'},
+  {'name': 'California', 'flag': '0/01/Flag_of_California.svg/45px-Flag_of_California.svg.png', 'type' : 'subordinate'},
+  {'name': 'Colorado', 'flag': '4/46/Flag_of_Colorado.svg/45px-Flag_of_Colorado.svg.png', 'type' : 'subordinate'},
   {'name': 'Connecticut', 'flag': '9/96/Flag_of_Connecticut.svg/39px-Flag_of_Connecticut.svg.png'},
   {'name': 'Delaware', 'flag': 'c/c6/Flag_of_Delaware.svg/45px-Flag_of_Delaware.svg.png'},
   {'name': 'Florida', 'flag': 'f/f7/Flag_of_Florida.svg/45px-Flag_of_Florida.svg.png'},
@@ -19,7 +23,7 @@ const statesWithFlags = [
     'flag': '5/54/Flag_of_Georgia_%28U.S._state%29.svg/46px-Flag_of_Georgia_%28U.S._state%29.svg.png'
   },
   {'name': 'Hawaii', 'flag': 'e/ef/Flag_of_Hawaii.svg/46px-Flag_of_Hawaii.svg.png'},
-  {'name': 'Idaho', 'flag': 'a/a4/Flag_of_Idaho.svg/38px-Flag_of_Idaho.svg.png'},
+  {'name': 'Idaho', 'flag': 'a/a4/Flag_of_Idaho.svg/38px-Flag_of_Idaho.svg.png', 'isDeletable' : true, 'type' : 'contact'},
   {'name': 'Illinois', 'flag': '0/01/Flag_of_Illinois.svg/46px-Flag_of_Illinois.svg.png'},
   {'name': 'Indiana', 'flag': 'a/ac/Flag_of_Indiana.svg/45px-Flag_of_Indiana.svg.png'},
   {'name': 'Iowa', 'flag': 'a/aa/Flag_of_Iowa.svg/44px-Flag_of_Iowa.svg.png'},
@@ -32,7 +36,7 @@ const statesWithFlags = [
   {'name': 'Michigan', 'flag': 'b/b5/Flag_of_Michigan.svg/45px-Flag_of_Michigan.svg.png'},
   {'name': 'Minnesota', 'flag': 'b/b9/Flag_of_Minnesota.svg/46px-Flag_of_Minnesota.svg.png'},
   {'name': 'Mississippi', 'flag': '4/42/Flag_of_Mississippi.svg/45px-Flag_of_Mississippi.svg.png'},
-  {'name': 'Missouri', 'flag': '5/5a/Flag_of_Missouri.svg/46px-Flag_of_Missouri.svg.png'},
+  {'name': 'Missouri', 'flag': '5/5a/Flag_of_Missouri.svg/46px-Flag_of_Missouri.svg.png', 'isDeletable' : true , 'type' : 'contact'},
   {'name': 'Montana', 'flag': 'c/cb/Flag_of_Montana.svg/45px-Flag_of_Montana.svg.png'},
   {'name': 'Nebraska', 'flag': '4/4d/Flag_of_Nebraska.svg/46px-Flag_of_Nebraska.svg.png'},
   {'name': 'Nevada', 'flag': 'f/f1/Flag_of_Nevada.svg/45px-Flag_of_Nevada.svg.png'},
@@ -68,7 +72,12 @@ const statesWithFlags = [
 export class TypeaheadPersonComponent {
 
   @Output() person: EventEmitter<any>;
+
+  //optional - placeholder to be used when we have a pre defined static list.
   @Input() personList: Array<any>;
+
+  //optional - when the source is a dynamic list to be obtained by calling REST endpoints.
+  @Input() urls: Array<string>;
 
   public model: any;
 
@@ -76,15 +85,22 @@ export class TypeaheadPersonComponent {
     this.person = new EventEmitter();
   }
 
-  search = (text$: Observable<string>) =>
-    text$
-      .debounceTime(200)
+  search = (text$: Observable<string>) => {
+    return  text$.debounceTime(200)
       .map(term => term === '' ? []
         : statesWithFlags.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
 
+  }
+
+
+
+
   formatter = (x: {name: string}) => x.name;
 
-  //this method is used to catch the selected match and emit it out to the containing component
+  /*----------------------------------------------------------------------------------------------
+    This method is used to catch the selected match and send it out to the containing component
+  ------------------------------------------------------------------------------------------------*/
+
   itemSelected(event: NgbTypeaheadSelectItemEvent){
     console.log('Received in the typeahead component: itemSelected() method......'+ event.item.name);
     this.person.emit(event.item);
