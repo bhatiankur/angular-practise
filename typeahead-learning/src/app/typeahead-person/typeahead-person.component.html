@@ -1,0 +1,12 @@
+
+<ng-template #rtComponent let-r="result" let-t="term">
+  <app-person-row [person]='r'></app-person-row>
+</ng-template>
+
+
+<label for="typeahead-template">To Account</label>
+<input id="typeahead-template" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" [resultTemplate]="rtComponent"
+       [inputFormatter]="formatter" (selectItem)="itemSelected($event)"  />
+<hr>
+<pre>Model: {{ model | json }}</pre>
+

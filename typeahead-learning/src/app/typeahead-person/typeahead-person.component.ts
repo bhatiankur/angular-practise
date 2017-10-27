@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
+import {NgbTypeaheadSelectItemEvent} from "@ng-bootstrap/ng-bootstrap";
 
 const statesWithFlags = [
   {'name': 'Alabama', 'flag': '5/5c/Flag_of_Alabama.svg/45px-Flag_of_Alabama.svg.png'},
@@ -60,12 +61,20 @@ const statesWithFlags = [
 ];
 
 @Component({
-  selector: 'ngbd-typeahead-template',
-  templateUrl: './typeahead-template.component.html',
-  styles: [`.form-control { width: 300px; }`]
+  selector: 'person-typeahead',
+  templateUrl: './typeahead-person.component.html',
+  styles: [`.form-control { width: 500px; }`]
 })
-export class TypeaheadTemplateComponent {
+export class TypeaheadPersonComponent {
+
+  @Output() person: EventEmitter<any>;
+  @Input() personList: Array<any>;
+
   public model: any;
+
+  constructor(){
+    this.person = new EventEmitter();
+  }
 
   search = (text$: Observable<string>) =>
     text$
@@ -75,4 +84,9 @@ export class TypeaheadTemplateComponent {
 
   formatter = (x: {name: string}) => x.name;
 
+  //this method is used to catch the selected match and emit it out to the containing component
+  itemSelected(event: NgbTypeaheadSelectItemEvent){
+    console.log('Received in the typeahead component: itemSelected() method......'+ event.item.name);
+    this.person.emit(event.item);
+  }
 }
