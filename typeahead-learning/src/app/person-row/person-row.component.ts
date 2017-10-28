@@ -8,22 +8,14 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class PersonRowComponent implements OnInit {
 
   @Input() person: any;
-  isDeletable: boolean;
-  @Input() isHeaderRow: boolean;
-  @Input() headerLabels: Array<string>;
-
+ 
   constructor() {}
 
   ngOnInit() {
-    if(this.person != undefined){
-      this.isDeletable = this.person.isDeletable;
-    }
-
-    console.log('Person recieved ' + this.person._index );
-
+    console.log('Person recieved ' + this.person._isHeaderRow );
   }
 
-  deletePerson(person: any): boolean{
+  deletePerson(person: any): boolean {
     //take the delete action
     console.log(person.name + ' was selected to delete in child..');
     return false;

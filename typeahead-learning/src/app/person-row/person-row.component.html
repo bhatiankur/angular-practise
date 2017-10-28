@@ -1,18 +1,9 @@
-<div *ngIf="isHeaderRow">
-  <div>
-    <span>{{ headerLabels }}</span>
-  </div>
-  <div>
-    <img [src]="'https://upload.wikimedia.org/wikipedia/commons/thumb/' + person?.flag" width="16">
-    {{ person?.name }}
-  </div>
-  <div *ngIf="isDeletable">
-    <a href="#" (click)="deletePerson(person); $event.stopPropagation()">
-      <i class="fa fa-trash-o" aria-hidden="true"></i>
-    </a>
-  </div>
+<div *ngIf="person?._isHeaderRow" (click)="$event.stopPropagation()">
+  <div>    
+    {{ person?._headers }}
+  </div>  
 </div>
-<div *ngIf="!isHeaderRow">
+<div *ngIf="!(person?._isHeaderRow)">
   <div>
     <img [src]="'https://upload.wikimedia.org/wikipedia/commons/thumb/' + person?.flag" width="16">
     {{ person?.name }}
