@@ -1,15 +1,13 @@
-import { MockPersonList } from './mock-person-data.model';
 
-
-export class PersonDataService {
+export class PersonDataViewService {
 
     personList: Array<any> = [];
     personList1: Array<any> = [];
     persons: Array<any> = [];
 
-    constructor(){
-        this.personList = (new MockPersonList()).getPersonList();
-        this.personList1 = (new MockPersonList()).getPersonList1();
+    constructor(personsProvided: Array<any>, personsInfo: Array<any>) {
+        this.personList = this.personList.concat(personsProvided[0]);
+        this.personList1 = this.personList1.concat(personsProvided[1]);
         this.loadPersonList(); 
     }
 
@@ -17,12 +15,9 @@ export class PersonDataService {
         return this.persons;
     }
 
-    public loadPersonList() {
-        console.log('Size of person list: ' + this.persons.length);
-        this.persons = this.persons.concat(this.addContactsToList());
-        console.log('Size of person list: ' + this.persons.length);
-        this.persons = this.persons.concat(this.addSubordinatesToList());
-        console.log('Size of person list: ' + this.persons.length);       
+    public loadPersonList() {        
+        this.persons = this.persons.concat(this.addContactsToList());        
+        this.persons = this.persons.concat(this.addSubordinatesToList());        
     }
 
     public addContactsToList(): Array<any> {
@@ -46,7 +41,7 @@ export class PersonDataService {
 
     public includeHeaderRow(list: Array<any>, _headers: Array<string>) {
 
-        list.sort((a, b) => (a.name > b.name) ? 1 : -1 );
+       list.sort((a, b) => (a.name > b.name) ? 1 : -1 );
        list.unshift({
             'name': 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
             '_headers': _headers,
@@ -64,7 +59,7 @@ export class PersonDataService {
     }
     public markDeletable(list: Array<any>, _isDeletable: boolean) {
         return list.map(e => {
-                if (e.isHeaderRow !== true) {
+                if (e._isHeaderRow !== true) {
                     e._isDeletable = _isDeletable;
                 }
               return e;

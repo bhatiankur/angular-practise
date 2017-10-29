@@ -1,28 +1,36 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import {NgbTypeaheadSelectItemEvent} from '@ng-bootstrap/ng-bootstrap';
+import { PersonDataViewService } from './person-data.service';
 
 @Component({
   selector: 'person-typeahead',
   templateUrl: './typeahead-person.component.html',
   styles: [`.form-control { width: 500px; }`]
 })
-export class TypeaheadPersonComponent {
+export class TypeaheadPersonComponent implements OnInit {
 
   @Output() person: EventEmitter<any>;
 
-  // optional - placeholder to be used when we have a pre defined static list.
-  @Input() personList: Array<any>;
+  @Input() persons: Array<any>;
+  @Input() personsAttrs: Array<any>;
 
+  personList: Array<any>;
   public model: any;
 
   constructor() {
-    this.person = new EventEmitter();
+    this.person = new EventEmitter();    
   }
 
-  search = (text$: Observable<string>) => {
+  ngOnInit() {
+    console.log('persons at receiving end' + this.persons.length);
+    this.personList = (new PersonDataViewService(this.persons, this.personsAttrs)).getPersonList();   
+  }
+
+  // This method definition contains the searching and filtering opertion
+  search = (text$: Observable<string>) => {    
     return  text$.debounceTime(200)
       .map(term => term === '' ? []
         : this.personList

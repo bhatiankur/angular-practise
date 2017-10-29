@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PersonDataService } from './person-data.service';
+import { MockPersonList } from './mock-person-data.model';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +10,12 @@ export class AppComponent implements OnInit
 {
   title = 'app';
 
-  personList: Array<any>;
-  
+  persons: Array<any> = [];
+
   constructor() {
-    this.personList = (new PersonDataService()).getPersonList();
+    this.persons.push((new MockPersonList()).getPersonList());
+    this.persons.push((new MockPersonList()).getPersonList1());
+    console.log(' Persons at source ' + this.persons.length);
   }
 
   ngOnInit() {}

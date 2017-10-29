@@ -11,9 +11,7 @@ export class PersonRowComponent implements OnInit {
  
   constructor() {}
 
-  ngOnInit() {
-    console.log('Person recieved ' + this.person._isHeaderRow );
-  }
+  ngOnInit() {}
 
   deletePerson(person: any): boolean {
     //take the delete action

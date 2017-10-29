@@ -1,9 +1,5 @@
 export class MockPersonList {
 
-    public header1 = {'isHeader' : 'true', 'headerLabels' : ['headerLabel1','headerLabel2']};
-    
-    public header2 = {'isHeader' : 'true', 'headerLabels' : ['headerLabel3','headerLabel4','headerLabel5']};
-    
     public personListFromServer = [
       {'name': 'Louisiana', 'flag': 'e/e0/Flag_of_Louisiana.svg/46px-Flag_of_Louisiana.svg.png'},
       {'name': 'Maine', 'flag': '3/35/Flag_of_Maine.svg/45px-Flag_of_Maine.svg.png'},

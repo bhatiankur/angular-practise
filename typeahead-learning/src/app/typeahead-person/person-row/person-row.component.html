@@ -8,7 +8,7 @@
     <img [src]="'https://upload.wikimedia.org/wikipedia/commons/thumb/' + person?.flag" width="16">
     {{ person?.name }}
   </div>
-  <div *ngIf="isDeletable">
+  <div *ngIf="person._isDeletable">
       <a href="#" (click)="deletePerson(person); $event.stopPropagation()">
         <i class="fa fa-trash-o" aria-hidden="true"></i>
       </a>
