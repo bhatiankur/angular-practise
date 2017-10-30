@@ -1,9 +1,17 @@
 export class MockPersonList {
 
+    public personAttr1 = { '_type' : 'contact',
+                            '_isDeletable' : true,
+                            '_headers' : ['Other accounts','Bank', 'Delete']};
+
+  public personAttr2 = { '_type' : 'subordinate',
+                          '_isDeletable' : false,
+                          '_headers' : ['Linked account','Available']};
+
     public personListFromServer = [
       {'name': 'Louisiana', 'flag': 'e/e0/Flag_of_Louisiana.svg/46px-Flag_of_Louisiana.svg.png'},
       {'name': 'Maine', 'flag': '3/35/Flag_of_Maine.svg/45px-Flag_of_Maine.svg.png'},
-      {'name': 'Maryland', 'flag': 'a/a0/Flag_of_Maryland.svg/45px-Flag_of_Maryland.svg.png'},      
+      {'name': 'Maryland', 'flag': 'a/a0/Flag_of_Maryland.svg/45px-Flag_of_Maryland.svg.png'},
       {'name': 'Massachusetts', 'flag': 'f/f2/Flag_of_Massachusetts.svg/46px-Flag_of_Massachusetts.svg.png'},
       {'name': 'Michigan', 'flag': 'b/b5/Flag_of_Michigan.svg/45px-Flag_of_Michigan.svg.png'},
       {'name': 'Minnesota', 'flag': 'b/b9/Flag_of_Minnesota.svg/46px-Flag_of_Minnesota.svg.png'},
@@ -36,7 +44,7 @@ export class MockPersonList {
       {'name': 'Wyoming', 'flag': 'b/bc/Flag_of_Wyoming.svg/43px-Flag_of_Wyoming.svg.png'}
     ];
 
-    public personListFromServer1 = [        
+    public personListFromServer1 = [
         {'name': 'Alabama', 'flag': '5/5c/Flag_of_Alabama.svg/45px-Flag_of_Alabama.svg.png', 'isDeletable' : true},
         {'name': 'Alaska', 'flag': 'e/e6/Flag_of_Alaska.svg/43px-Flag_of_Alaska.svg.png'},
         {'name': 'Arizona', 'flag': '9/9d/Flag_of_Arizona.svg/45px-Flag_of_Arizona.svg.png'},
@@ -58,13 +66,5 @@ export class MockPersonList {
         {'name': 'Kansas', 'flag': 'd/da/Flag_of_Kansas.svg/46px-Flag_of_Kansas.svg.png'},
         {'name': 'Kentucky', 'flag': '8/8d/Flag_of_Kentucky.svg/46px-Flag_of_Kentucky.svg.png'}
       ];
-
-      
-    public getPersonList() {
-        return this.personListFromServer;
-    }
-    public getPersonList1() {
-        return this.personListFromServer1;
-    }
 
 }

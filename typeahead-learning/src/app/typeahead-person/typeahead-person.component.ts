@@ -3,7 +3,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import {NgbTypeaheadSelectItemEvent} from '@ng-bootstrap/ng-bootstrap';
-import { PersonDataViewService } from './person-data.service';
+import { PersonDataViewService } from './person-data-view.service';
 
 @Component({
   selector: 'person-typeahead',
@@ -21,16 +21,15 @@ export class TypeaheadPersonComponent implements OnInit {
   public model: any;
 
   constructor() {
-    this.person = new EventEmitter();    
+    this.person = new EventEmitter();
   }
 
   ngOnInit() {
-    console.log('persons at receiving end' + this.persons.length);
-    this.personList = (new PersonDataViewService(this.persons, this.personsAttrs)).getPersonList();   
+    this.personList = (new PersonDataViewService(this.persons, this.personsAttrs)).getPersonList();
   }
 
   // This method definition contains the searching and filtering opertion
-  search = (text$: Observable<string>) => {    
+  search = (text$: Observable<string>) => {
     return  text$.debounceTime(200)
       .map(term => term === '' ? []
         : this.personList

@@ -6,16 +6,20 @@ import { MockPersonList } from './mock-person-data.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit 
+export class AppComponent implements OnInit
 {
   title = 'app';
 
   persons: Array<any> = [];
+  personsAttrs: Array<any> = [];
 
   constructor() {
-    this.persons.push((new MockPersonList()).getPersonList());
-    this.persons.push((new MockPersonList()).getPersonList1());
-    console.log(' Persons at source ' + this.persons.length);
+    //loading static mock data
+    let mock: MockPersonList = new MockPersonList();
+    this.persons.push(mock.personListFromServer);
+    this.persons.push(mock.personListFromServer1);
+    this.personsAttrs.push(mock.personAttr1);
+    this.personsAttrs.push(mock.personAttr2);
   }
 
   ngOnInit() {}
