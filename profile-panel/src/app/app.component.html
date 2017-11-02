@@ -1,0 +1,14 @@
+<h2> This is a test project..</h2>
+<form>
+<div class="col-lg-4">
+    <input id="person" [(ngModel)]="filterString" (ngModelChange)="triggerfilter($event)" (focus)="listAll()" (blur)="closePopup()" 
+    type="text" class="form-control" name="person" placeholder="person">    
+</div>
+
+<template #popTemplate>Here we go: <div [innerHtml]="html"></div></template>
+<button type="button" class="btn btn-success"
+        [popover]="popTemplate" popoverTitle="Dynamic html inside">
+  Show me popover with html
+</button>
+</form>
+

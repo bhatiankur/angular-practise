@@ -3,9 +3,14 @@
     <app-person-row [person]='r'></app-person-row>
 </ng-template>
 
+<ng-template #blank></ng-template>
+<ng-template #popContent>Picke from {{ result }}</ng-template>
+
 <label for="typeahead-template">To Account</label>
-<input id="typeahead-template" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" [resultTemplate]="rtComponent"
-       [inputFormatter]="formatter" (selectItem)="itemSelected($event)"  />
+<input (focus)="showPopupWithAll()" id="typeahead-template" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search"
+       [inputFormatter]="formatter" (selectItem)="itemSelected($event)" [resultTemplate]="blank"
+       [ngbPopover]="popContent"  
+       #p="ngbPopover" triggers="manual" placement="bottom" />
 <hr>
 <pre>Model: {{ model | json }}</pre>
 

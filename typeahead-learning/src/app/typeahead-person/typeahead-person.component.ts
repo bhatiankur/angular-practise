@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, Output, OnInit, ViewChild} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
-import {NgbTypeaheadSelectItemEvent} from '@ng-bootstrap/ng-bootstrap';
+import {NgbTypeaheadSelectItemEvent, NgbPopover} from '@ng-bootstrap/ng-bootstrap';
 import { PersonDataViewService } from './person-data-view.service';
 
 @Component({
@@ -16,6 +16,9 @@ export class TypeaheadPersonComponent implements OnInit {
 
   @Input() persons: Array<any>;
   @Input() personsAttrs: Array<any>;
+  @ViewChild('p') public popover: NgbPopover;
+
+  greeting = 'Hello world';
 
   personList: Array<any>;
   public model: any;
@@ -47,5 +50,16 @@ export class TypeaheadPersonComponent implements OnInit {
   itemSelected(event: NgbTypeaheadSelectItemEvent){
     console.log('Received in the typeahead component: itemSelected() method......'+ event.item.name);
     this.person.emit(event.item);
+  }
+
+  showPopupWithAll() {
+    console.log('reached here');
+    this.popover.close();
+    this.popover.open();
+  }
+
+  onSearchChange(e : Event) {
+    console.log('reached here to close');
+    this.popover.close();
   }
 }
