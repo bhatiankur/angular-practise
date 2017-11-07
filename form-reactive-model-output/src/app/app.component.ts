@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {NewAccount} from "./new-account.model";
+
 
 @Component({
   selector: 'app-root',
@@ -8,7 +10,9 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/form
 })
 export class AppComponent {
 
-  newAccount: any;
+  newAccount: NewAccount = new NewAccount();
+
+  @Output() changes : any;
 
   isAddNewAccountFormVisible : boolean;
 
@@ -21,6 +25,9 @@ export class AppComponent {
   buttonLabel : string = "New Account";
 
   constructor(fb : FormBuilder){
+
+    this.changes = new EventEmitter();
+
     this.newAccountFormGroup = fb.group({
       'accountNumber' : ['', Validators.required],
       'BSB' : ['', Validators.required],
@@ -33,6 +40,37 @@ export class AppComponent {
     this.accountName = this.newAccountFormGroup.controls['accountName'];
     this.save = this.newAccountFormGroup.controls['save'];
 
+    // listen for changes to form fields.
+    console.log('create listeners');
+    this.accountNumber.valueChanges.forEach(
+      (value: string) => {
+        console.log('in amount handler ', value);
+        this.newAccount.accountNumber = value;
+        this.fireModelChange();
+      }
+    );
+    this.BSB.valueChanges.forEach(
+      (value: string) => {
+        console.log('in amount handler ', value);
+        this.newAccount.BSB = value;
+        this.fireModelChange();
+      }
+    );
+    this.accountName.valueChanges.forEach(
+      (value: string) => {
+        console.log('in amount handler ', value);
+        this.newAccount.accountName = value;
+        this.fireModelChange();
+      }
+    );
+    this.save.valueChanges.forEach(
+      (value: boolean) => {
+        console.log('in amount handler ', value);
+        this.newAccount.toBeSaved = value;
+        this.fireModelChange();
+      }
+    );
+
   }
 
   public showAddNewAccountPanel() {
@@ -40,17 +78,17 @@ export class AppComponent {
     if(this.isAddNewAccountFormVisible) {
       this.isAddNewAccountFormVisible = false;
       this.buttonLabel = "New Account";
-
     }
     else{
       this.isAddNewAccountFormVisible = true;
       this.buttonLabel = "Cancel";
-
     }
   }
 
-  onSubmit(value: string): void {
-    console.log('submitted model: ', value);
-    this.newAccount = value;
+  private fireModelChange() {
+    console.log('firing model change');
+    this.newAccount.valid = this.newAccountFormGroup.valid;
+    this.changes.emit(this.newAccount);
   }
+
 }
