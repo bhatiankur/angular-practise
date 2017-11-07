@@ -1,0 +1,17 @@
+<div class="container">
+<span class="col-12 d-flex flex-row-reverse">
+  <button class="btn btn-secondary" (click)="showAddNewAccountPanel()">{{ buttonLabel }}<i class="icon-plus"></i></button>
+</span>
+<div class="justify-content-center" *ngIf="isAddNewAccountFormVisible">
+  <div [formGroup]="newAccountFormGroup" (ngSubmit)="onSubmit()">
+    <input class="form-control" type="text" placeholder="Account Name" formControlName="accountNumber">
+    <input class="form-control" type="text" placeholder="BSB" formControlName="BSB">
+    <input class="form-control" type="text" placeholder="Account Number" formControlName="accountName">
+    <span class = "form-control"><input type="checkbox" formControlName="save"> Save to address book</span>
+    <button type="button" (click)="onSubmit(newAccountFormGroup)">Submit</button>
+  </div>
+</div>
+
+<hr>
+<pre>NewAccount: {{ newAccount?.valid}}</pre>
+</div>
