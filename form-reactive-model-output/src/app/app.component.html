@@ -3,7 +3,7 @@
   <button class="btn btn-secondary" (click)="showAddNewAccountPanel()">{{ buttonLabel }}<i class="icon-plus"></i></button>
 </span>
 <div class="justify-content-center" *ngIf="isAddNewAccountFormVisible">
-  <div [formGroup]="newAccountFormGroup">
+  <div [formGroup]="newAccountFormGroup" novalidate>
     <input class="form-control" type="text" placeholder="Account Name" formControlName="accountNumber">
     <input class="form-control" type="text" placeholder="BSB" formControlName="BSB">
     <input class="form-control" type="text" placeholder="Account Number" formControlName="accountName">
@@ -12,5 +12,6 @@
 </div>
 
 <hr>
-<pre>NewAccount: {{ newAccount?.valid}}</pre>
+<pre>NewAccount (valid): {{ newAccount?.valid}}</pre>
+  <pre>NewAccount (value): {{ newAccount?.getValue()}} | json </pre>
 </div>

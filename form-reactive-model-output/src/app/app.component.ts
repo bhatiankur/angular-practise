@@ -10,13 +10,13 @@ import {NewAccount} from "./new-account.model";
 })
 export class AppComponent {
 
-  newAccount: NewAccount = new NewAccount();
+  newAccount: NewAccount;
 
   @Output() changes : any;
 
   isAddNewAccountFormVisible : boolean;
-
   newAccountFormGroup : FormGroup;
+  fb : FormBuilder;
   accountNumber : AbstractControl;
   BSB : AbstractControl;
   accountName : AbstractControl;
@@ -25,10 +25,14 @@ export class AppComponent {
   buttonLabel : string = "New Account";
 
   constructor(fb : FormBuilder){
-
     this.changes = new EventEmitter();
+    this.newAccount = new NewAccount('','','',false,false);
+    this.fb = fb;
+  }
 
-    this.newAccountFormGroup = fb.group({
+  ngOnInit() {
+
+    this.newAccountFormGroup = this.fb.group({
       'accountNumber' : ['', Validators.required],
       'BSB' : ['', Validators.required],
       'accountName' : ['', Validators.required],
@@ -46,31 +50,36 @@ export class AppComponent {
       (value: string) => {
         console.log('in amount handler ', value);
         this.newAccount.accountNumber = value;
-        this.fireModelChange();
+        this.fireModelChange(this.newAccount, this.newAccountFormGroup);
       }
     );
     this.BSB.valueChanges.forEach(
       (value: string) => {
-        console.log('in amount handler ', value);
+        console.log('in bsb handler ', value);
         this.newAccount.BSB = value;
-        this.fireModelChange();
+        this.fireModelChange(this.newAccount, this.newAccountFormGroup);
       }
     );
     this.accountName.valueChanges.forEach(
       (value: string) => {
-        console.log('in amount handler ', value);
+        console.log('in accountName handler ', value);
         this.newAccount.accountName = value;
-        this.fireModelChange();
+        this.fireModelChange(this.newAccount, this.newAccountFormGroup);
       }
     );
     this.save.valueChanges.forEach(
       (value: boolean) => {
-        console.log('in amount handler ', value);
+        console.log('in save handler ', value);
         this.newAccount.toBeSaved = value;
-        this.fireModelChange();
+        this.fireModelChange(this.newAccount, this.newAccountFormGroup);
       }
     );
-
+    this.newAccountFormGroup.valueChanges.forEach(
+      (value: string) => {
+        console.log('in form handler ', value);
+        this.fireModelChange(this.newAccount, this.newAccountFormGroup);
+      }
+    );
   }
 
   public showAddNewAccountPanel() {
@@ -85,9 +94,10 @@ export class AppComponent {
     }
   }
 
-  private fireModelChange() {
+  private fireModelChange(model, form) {
     console.log('firing model change');
-    this.newAccount.valid = this.newAccountFormGroup.valid;
+    this.newAccount = model;
+    this.newAccount.valid = form.valid;
     this.changes.emit(this.newAccount);
   }
 
