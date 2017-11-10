@@ -1,0 +1,532 @@
+@import "waiv-colours";
+@import "../../../node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+
+//stops scroll bar from jumping https://css-tricks.com/elegant-fix-jumping-scrollbar-issue/
+html {
+  overflow-y: scroll;
+}
+//links
+a {
+  outline: 0;
+}
+
+//heading
+.thin-text{
+  font-weight:500;
+}
+
+
+//div
+.x-sm-scroll {
+  @include media-breakpoint-down(sm) {
+
+    display: block;
+    overflow-x: scroll;
+
+  }
+}
+
+.container-sm-bigger{
+  @include media-breakpoint-down(sm){
+    width:150%;
+  }
+}
+
+
+
+//buttons
+
+.btn {
+  &.btn-lg {
+    font-size: 1rem;
+  }
+  &.btn-help {
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+  }
+  &.btn-link{
+    font-weight: 600;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    color:$sky;
+    &:active,
+    &:hover{
+      box-shadow: none !important;
+    }
+  }
+  &.logout {
+    padding: 0.4375rem 1.25rem; // y = 7px/16px, x = 20px/16px
+    border-radius: 0.8rem;
+    line-height: 1;
+    font-size: 1rem;
+  }
+  &.btn-light {
+    color: $white;
+  }
+}
+
+.btn-group > .btn {
+  border-radius: 0;
+  border-color: $stone-3;
+  &.active{
+    border-color: $sky;
+  }
+  &:hover{
+    @extend .active;
+  }
+
+}
+
+//forms
+.form-control.ng-invalid {
+  border-color: $sun;
+}
+
+
+
+//TODO find a less hacky solution for caveats
+//code snippet adapted from from https://jsfiddle.net/kezkankrayon/mo5mhLtn/
+.has-feedback-custom {
+  position: relative;
+  .form-control {
+    display: inherit;
+    padding-right: calc(#{$input-height} * 0.6);
+  }
+  .form-control-feedback-custom {
+    color: $stone-7;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width:calc(#{$input-height} * 0.6);
+    height: $input-height;
+    line-height: $input-height;
+    text-align: center;
+    pointer-events: none;
+
+  }
+}
+//end of code snippet
+
+.label-big{
+  @extend h2; //has the same look as a heading just different font size
+  font-size: (28/12)rem;
+}
+
+//dropdown
+.dropdown-menu {
+  border-radius: 0;
+}
+
+
+#transaction-list{
+  b{
+    color: $stone-10;
+  }
+
+  .header{
+    background-color: $stone-3;
+    color: $stone-10;
+    padding-top: $grid-gutter-width/2;
+    padding-bottom: $grid-gutter-width/2;
+  }
+
+  .transaction{
+
+    .info{
+      padding-top: $grid-gutter-width;
+      padding-bottom: $grid-gutter-width;
+      position: relative;
+      background-color: white;
+      &.pending {
+        background-color: $stone-0;
+        b, h4, i {
+          color: $sky;
+        }
+        &.active, &.info:hover {
+          b, h4, i{
+          color: $sky;
+          }
+        }
+      }
+      &.active, &.info:hover {
+        background-color: $ocean;
+        cursor: pointer;
+        color: $sky;
+        b, h4 {
+          color: $white;
+        }
+      }
+
+
+
+      .date{
+        text-align: center;
+      }
+      &.active:after {
+        content: "";
+        //TODO make these numbers dynamic
+        position: absolute;
+        bottom: -15px;
+        z-index: 20;
+        left: 65px;
+        width: 0;
+        height: 0;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-top: 15px solid $ocean;
+      }
+    }
+    .extra-info{
+      background-color: $stone-0;
+      text-align: left;
+    }
+  }
+}
+
+
+
+//nav
+#home-nav{
+  div{
+    z-index: 2;
+    .nav-tabs {
+      .nav-item {
+        .nav-link {
+          border-color: $stone-0;
+          font-weight: 600;
+          color: $stone-7;
+          border-bottom-width: 0.1mm;
+          border-right-width: 0.1mm;
+          border-top: none;
+          border-left-width: 0;
+          &:hover {
+            color: $stone-10;
+            text-decoration: underline;
+          }
+          &.active {
+            cursor:default;
+            border-bottom-color: $stone-white;
+            &:hover {
+              text-decoration: none;
+              color: $stone-7;
+            }
+          }
+        }
+        &:first-child .nav-link {
+          border-left-width: 0.1mm;
+        }
+      }
+    }
+  }
+
+  .nav-line{
+    margin: 0;
+    position: absolute;
+    width: 100%;
+    border-top: 0.2mm solid #e6e4e4;
+    bottom: 0;
+  }
+}
+
+
+
+.navbar-brand {
+  img {
+    height: 1rem;
+    display: block;
+  }
+}
+
+
+//footer scss
+body{
+  height:100vh;
+}
+
+app-root{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100vh;
+}
+app-login{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  .content{
+    -webkit-box-flex:1;
+    -ms-flex:1 1 auto;
+    flex:1 1 auto;  }
+}
+footer{
+    background-color: $ocean;
+}
+
+
+//modal
+//bootstrap uses pixels for modals so we will too
+.modal-content {
+    border-radius: 0;
+    .modal-header {
+        color: $white;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        background-color: $ocean;
+
+    }
+    .btn {
+        padding-bottom: 10px;
+        padding-top: 10px;
+        padding-left: 26px;
+        padding-right: 26px;
+    }
+
+}
+// Select
+.text-select{
+  border: none;
+  background: transparent;
+}
+
+//pop over
+
+.popover {
+    border-radius: 0;
+}
+
+
+//hacky
+popover-container{
+  top:0!important;
+  left:0!important;
+  &.popover{
+    @include make-col-ready();
+    @include make-col(12);
+  }
+}
+
+//other
+#transaction-search {
+  &.show-advanced{
+    padding-top: 1.25rem; //22px/16px
+    padding-bottom: 1.25rem; //22px/16px
+    padding-left: 1.375rem; //22 px/16px
+    padding-right: 1.375rem; //22 px/16px
+    max-height: 800px;
+    background-color: $sky;
+    color: $white;
+    .btn-link{
+      color: $ocean;
+    }
+  }
+  .search-btn{
+    color: $white;
+    background-color: $ocean;
+     &.form-control:disabled, &.form-control[readonly]{
+      background-color: $stone-10;
+    }
+  }
+  //based off bootstrap/_forms.scss line:300 ->
+  .inline {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    .flex-group {
+      display: flex;
+      flex-flow: row nowrap;
+      width: 100%;
+      margin-bottom: 0.25rem ;
+      label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0;
+      }
+      .form-control{
+        display: inline-block;
+        width: 100%;
+      }
+    }
+    @include media-breakpoint-up(md) {
+      flex-flow: row nowrap;
+      .flex-group{
+        margin-bottom: 0;
+        &#middle-flex {
+          flex: 1 1 60%;
+        }
+      }
+      .search-btn {
+        display: inline-block;
+        padding: ($input-btn-padding-x) ($input-btn-padding-y + 0.21875rem); // y = input padding height  ,x = input padding height + ((fa-line-height(1.5) - 1) * (fa-font-size / 16px) /2)
+        width: auto;
+      }
+    }
+
+
+  }
+
+}
+
+
+//font awesome additions
+.fa-animate{
+  transition: transform 0.5s;
+}
+.fa-rotate-45{
+  transform:rotate(45deg);
+}
+
+//curreny
+currency{
+  display: block;
+  word-break: break-all;
+}
+
+
+//ngx date picker overide
+bs-datepicker-container{
+  .waiv-date-picker{
+    box-shadow: none;
+    background-color: transparent;
+    .bs-datepicker-head{
+      display: flex;
+      font-size: 1rem;
+      font-weight: 600;
+      background-color: $ocean;
+      padding: 0;
+      height: 1.875rem; //30px / 16px
+      border-radius: 0;
+      bs-datepicker-navigation-view{
+        width: 100%;
+        display: inline-flex;
+        justify-content: space-between;
+      }
+
+      &:after{
+          content: "";
+          position: absolute;
+          top: 5px;
+          z-index: 20;
+          left: 0;
+          right: 0;
+          margin:0 auto;
+          width: 0;
+          height: 0;
+        @include media-breakpoint-up(md) {
+          border-left: 10px solid transparent;
+          border-right: 10px solid transparent;
+          border-bottom: 10px solid $ocean;
+        }
+      }
+    }
+    .bs-datepicker-body{
+      padding: 0 0 0.25rem;
+      min-height: unset;
+
+      background-color: $white;
+      table {
+        th{
+          font-size: 1rem;
+          padding-bottom: 0.625rem ; //10px/16px
+          padding-top: 0.625rem ; //10px/16px
+          line-height: 1;
+          color: $stone-10;
+          font-weight: 600;
+        }
+        td {
+          span{
+            width: 1.875rem;
+            font-weight: 600;
+            margin: 0 0.25rem;
+            border-radius: 30%;
+            font-size: 1rem;
+            color: $stone-7;
+            padding: 0.25rem 0;
+            line-height: 1;
+            height: unset;
+            &.is-other-month{
+              color: $stone-1;
+            }
+          }
+          span.selected,
+          &.selected span,
+          span[class*="select-"]:after,
+          &[class*="select-"] span:after {
+            background-color: $ocean;
+            color: $white;
+          }
+          &.week span {
+            color: $ocean-dark;
+          }
+        }
+
+        &.is-highlighted:not(.disabled):not(.selected) span,
+        span.is-highlighted:not(.disabled):not(.selected) {
+          background-color: $ocean;
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+//typeahead
+.dropdown {
+  left: 0 !important;
+  right: 0;
+  margin: 0 auto;
+  min-height: 1%;
+  background-color: $white;
+}
+
+.person-selector-wrapper {
+  position: relative;
+  .person-selector {
+    position: unset; //normally this would be relative but where making the wrapper relative
+    //so that the typeahead container can be centered with in it and obtain its width as percentage
+    //of the wrappers width
+    .dropdown{
+      //waiv-typeahead container sits inside a col-12 but needs to be ov width col-8
+      width: percentage(8/12); //8 columns over current 12
+      &.dropdownblue{
+
+      }
+      & > *{
+        padding: $grid-gutter-width/2 #{(15/16)}rem;
+      }
+      .dropdown-item{
+        .person{
+          display: flex;
+          width: 2.375rem ; //38px/16px
+          height: 2.375rem ; //38px/16px
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+  .typeahead-wrapper {
+    width: 100vw;//typeaheads sit in flex with max widths which means that max-containers width:100% will only take 100% width of its first ancestor with position relative
+    left:-50vw!important;
+    position: absolute;
+    display: block;
+    z-index: 200;
+  }
+
+

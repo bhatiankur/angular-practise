@@ -1,0 +1,26 @@
+<header class="bg-brand">
+  <div class="container">
+    <nav class="navbar navbar-expand-md navbar-dark row justify-content-between" >
+      <div>
+        <button class="navbar-toggler" type="button" (click)="navToggle()" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand align-middle" routerLink="/">
+          <img src="../../../assets/img/Logo_waivcard_RGB_reversed.svg" alt="Waiv">
+        </a>
+      </div>
+      <div>
+          <select class="border-0 mr-1 bg-brand text-white" (change)="switchLanguage($event)">
+              <option value="en">ENG</option>
+              <option value="es">ESP</option>
+          </select>
+
+        <app-loading *ngIf="auth.customer?.inProgress()"></app-loading>
+        <span *ngIf="auth.customer?.result as customer">
+          <a class="text-white mr-2">{{customer.firstName}}</a>
+          <button translate type="button" class="btn btn-primary logout" routerLink="/logout">Logout</button>
+        </span>
+      </div>
+    </nav>
+  </div>
+</header>

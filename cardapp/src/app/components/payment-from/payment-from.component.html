@@ -1,0 +1,78 @@
+
+<div class="container col-12">
+    <div [formGroup]="paymentFromForm" novalidate>
+
+        <div class="form-group row col-12">
+            <h4 class="col-3">
+                From Account
+            </h4>
+            <app-account-selector class="col-3 form-control" [textSize]=6 [showBalance]="true" 
+            (selected)="onAccountSelected($event)"></app-account-selector>
+        </div>
+            
+        <div class="form-group col-12 row">
+            <label class="center-block col-3"></label>
+            <input type="number" class="form-control col-4" id="amount" 
+                required
+                formControlName="amount"
+                placeholder="Amount">
+            <label class="col-2" >{{limit | waivCurrency }} limit</label>
+            <a >Change</a>
+        </div>
+        <div *ngIf="amount.invalid && (amount.dirty || amount.touched)"
+            class=" col-12 row">
+            <label class="center-block col-3"></label>
+            <div class="alert alert-danger">
+                <div *ngIf="amount.errors.required">
+                    Amount is required.
+                </div>
+                <div *ngIf="amount.errors.accountLimit">
+                        Amount is over limit
+                </div>
+                <div *ngIf="amount.errors.min">
+                    Amount is less than minimum allowed
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row col-12">
+            <label class="center-block col-3"></label>
+            <input class="form-control col-4" 
+                type="text"
+                formControlName="ourDescription"
+                placeholder="Your Description">
+
+            <label class="center-block col-4">Save description for Recipient
+                </label>
+                <input class="form-control col-1" 
+                    type="checkbox"
+                    formControlName="saveDescriptionForRecipient">
+
+        </div>
+        <div *ngIf="ourDescription.invalid && (ourDescription.dirty || ourDescription.touched)"
+                class="row col-12">
+            <label class="center-block col-3"></label>
+            <div class="alert alert-danger">
+                <div *ngIf="ourDescription.errors.required">
+                Description is required.
+                </div>
+            </div>
+        </div>    
+
+        <div class="form-group row col-12">
+                <label class="center-block col-3"></label>
+                <input class="form-control col-4"
+                    type="text" 
+                    formControlName="theirDescription"
+                    placeholder="Recipient Description">
+        </div>
+        
+        
+        <!-- <button type="submit" class="btn btn-success" [disabled]="!paymentFromForm.valid">Submit</button> -->
+
+    </div>
+
+    <!-- <p>Form value: {{ paymentFromForm.value | json }}</p>
+    <p>Form status: {{ paymentFromForm.status | json }}</p> -->
+            
+</div>

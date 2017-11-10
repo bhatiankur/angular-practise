@@ -1,0 +1,27 @@
+<div>
+  <div *ngIf="request?.result">
+    Password Changed<br/><br/>
+  </div>
+  <div *ngIf="!(request?.result)">
+    <form (ngSubmit)="save()">
+      Current Password:
+      <input type="password" name="oldPassword" ngModel required><br/>
+      New Password:
+      <input type="password" name="newPassword" ngModel required><br/>
+      New Password (again):
+      <input type="password" name="newPasswordCheck" ngModel required><br><br>
+
+      <input type="submit" class="invisible" [disabled]="!saveEnabled()">
+
+      <!--{this.http.httpPostError &&-->
+      <!--<div>-->
+        <!--<br/>-->
+        <!--<b>Error:</b> {this.http.response.data.errorCode || this.http.response.data.response}-->
+      <!--</div>-->
+
+    </form>
+  </div>
+  <div *ngIf="request?.errorResponse" class="alert alert-danger">
+    {{request?.errorResponse.error | json}}
+  </div>
+</div>

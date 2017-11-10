@@ -1,0 +1,25 @@
+<nav id="home-nav" class="bg-white navbar navbar-expand-md p-0  mb-4 mb-md-8">
+  <div class="container">
+    <div class="collapse row navbar-collapse" [ngClass]="{show : app.showHomeNav }">
+      <ul class="navbar-nav nav-tabs nav-fill" style="flex:auto">
+        <li class="nav-item">
+          <a translate class="nav-link" routerLinkActive="active" routerLink="/accounts">View Accounts</a>
+        </li>
+        <li class="nav-item">
+          <a translate class="nav-link" routerLinkActive="active" routerLink="/payment">Pay Someone</a>
+        </li>
+        <li class="nav-item">
+          <a translate class="nav-link" routerLinkActive="active" routerLink="/settings">Settings</a>
+        </li>
+        <li class="nav-item">
+          <a translate class="nav-link" routerLinkActive="active" routerLink="/account-details">Account Details</a>
+        </li>
+        <li class="nav-item">
+          <a translate class="nav-link" routerLinkActive="active" routerLink="/support">Support</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <hr class="nav-line"/>
+</nav>
+<router-outlet></router-outlet>

@@ -1,0 +1,10 @@
+<div class="btn-group" *ngIf="selectedItem">
+  <button *ngFor="let item of items" type="button"
+          class="btn" [ngClass]="{'btn-secondary': selectedItem === item}"
+          (click)="onItemSelected(item)">
+    {{item.text}}
+  </button>
+</div>
+<div>
+  <ng-content></ng-content>
+</div>

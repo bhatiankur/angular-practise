@@ -1,0 +1,64 @@
+<div class="container">
+<span class="col-12 d-flex flex-row-reverse">
+  <button class="btn btn-secondary" (click)="showAddNewAccountPanel()">{{ buttonLabel }}<i class="icon-plus"></i></button>
+</span>
+
+  <div class="justify-content-center" *ngIf="isAddNewAccountFormVisible">
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn text-nowrap waivAccountSelector" id="destination-type" ngbDropdownToggle>{{ selectedDestinationType }}</button>
+      <div ngbDropdownMenu aria-labelledby="destination-type">
+        <button class="dropdown-item" (click)="bankaccountTypeSelected()">BankAccount</button>
+        <button class="dropdown-item" (click)="mobileTypeSelected()">Mobile</button>
+        <button class="dropdown-item" (click)="emailaddressTypeSelected()">EmailAddress</button>
+      </div>
+    </div>
+
+    <div *ngIf="selectedDestinationType == 'BankAccount'" [formGroup]="newAccountFormGroup" novalidate>
+      <input class="form-control" type="text" placeholder="Account Name" formControlName="accountNumber">
+      <div *ngIf="accountNumber?.invalid && (accountNumber?.dirty || accountNumber?.touched)" class="alert alert-danger">
+        <div *ngIf="accountNumber?.errors.required">
+          Account Number is required.
+        </div>
+      </div>
+      <input class="form-control" type="text" placeholder="BSB" formControlName="BSB">
+      <div *ngIf="BSB?.invalid && (BSB?.dirty || BSB?.touched)" class="alert alert-danger">
+        <div *ngIf="BSB?.errors.required">
+          BSB code is required.
+        </div>
+      </div>
+      <input class="form-control" type="text" placeholder="Account Number" formControlName="accountName">
+      <div *ngIf="accountName?.invalid && (accountName?.dirty || accountName?.touched)" class="alert alert-danger">
+        <div *ngIf="accountName?.errors.required">
+          Account Name is required.
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="selectedDestinationType == 'Mobile'" [formGroup]="newAccountFormGroupMobile" novalidate>
+      <input class="form-control" type="text" placeholder="Mobile Number" formControlName="mobileNumber">
+      <div *ngIf="mobileNumber?.invalid && (mobileNumber?.dirty || mobileNumber?.touched)" class="alert alert-danger">
+        <div *ngIf="mobileNumber?.errors.required">
+          Mobile Number is required.
+        </div>
+        <div *ngIf="mobileNumber?.errors.phoneNumberError">
+          Mobile Number is incorrect.
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="selectedDestinationType == 'EmailAddress'" [formGroup]="newAccountFormGroupEmailAddress" novalidate>
+      <input class="form-control" type="text" placeholder="Email Address" formControlName="emailAddress">
+      <div *ngIf="emailAddress?.invalid && (emailAddress?.dirty || emailAddress?.touched)" class="alert alert-danger">
+        <div *ngIf="emailAddress?.errors.required">
+          Email Address is required.
+        </div>
+        <div *ngIf="emailAddress?.errors.email">
+          Email Address is incorrect.
+        </div>
+      </div>
+    </div>
+
+    <span class = "form-control"><input type="checkbox" formControlName="save"> Save to address book</span>
+
+  </div>
+</div>

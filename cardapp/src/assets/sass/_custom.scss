@@ -1,0 +1,184 @@
+@import "waiv-font";
+@import "waiv-colours";
+//Waiv Custom changes
+//Colours
+$grays: (
+        100: $stone-white,
+        200: $stone-0,
+        300: $stone-1,
+        400: $stone-3,
+        500: $stone-5,
+        600: $stone-6,
+        700: $stone-7,
+        800: $stone-8,
+        900: $stone-10
+);
+
+$colors: (
+        ocean: $ocean,
+        ocean-dark: $ocean-dark,
+        sky: $sky,
+        sun: $sun,
+        sun-dark: $sun-dark,
+        coral: $coral,
+        moss: $moss,
+        moss-dark: $moss-dark,
+        grass: $grass
+);
+
+$theme-colors: (
+        brand: $ocean,
+        primary: $sun,
+        secondary: $sky,
+        success: $moss,
+        info: $grass,
+        warning: $sun,
+        danger: $sun-dark,
+        clear: #fff,
+        light: $stone-3,
+        dark: $ocean-dark,
+        dark-gray: $stone-10
+);
+
+$enable-shadows: true;
+//Spacing
+$spacer: 1rem;
+$spacers: (
+        0: 0,
+        1: ($spacer * .25),
+        2: ($spacer * .5),
+        3: $spacer,
+        4: ($spacer * 1.5),
+        5: ($spacer * 2),
+        6: ($spacer * 2.5),
+        7: ($spacer * 3),
+        8: ($spacer * 3.5)
+);
+
+//Body
+$body-bg: $stone-white;
+$body-color: $stone-7;
+
+//Links
+$link-color:$white;
+//Grid Breakpoint
+$grid-breakpoints: (
+        xs: 0,
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+);
+
+
+// Grid containers
+$container-max-widths: (
+        sm: 540px,
+        md: 720px,
+        lg: 980px,
+);
+
+//Grid columns
+$grid-gutter-width: 20px;
+
+//Component
+$component-active-color: $ocean;
+
+// Fonts
+
+$font-family-sans-serif: "LatoWeb",  Arial, sans-serif;
+$font-family-base: $font-family-sans-serif;
+
+
+$h1-font-size: 2.675rem;
+$headings-margin-bottom: 0;
+$headings-color: $stone-10;
+$headings-font-weight:   700;
+
+$hr-border-color: $stone-3;
+$hr-border-width: 0.1mm;
+// Tables
+
+$table-cell-padding : $grid-gutter-width/2;
+$table-border-width: 0;
+$table-bg: $white;
+$table-head-bg:$stone-3;
+$table-head-color:$stone-10;
+
+
+//Buttons
+$input-btn-padding-y: .625rem; //10px / 16px
+$input-btn-padding-x: .625rem; //10px /16px
+$btn-font-weight: 500;
+$btn-border-radius: .75rem; // 12px / 16px
+$btn-focus-box-shadow: none;
+$input-btn-padding-y-lg:    .625rem; // 10px / 16px
+$input-btn-padding-x-lg:    2.5rem ; // 40px / 16px
+
+
+
+
+//Forms
+$input-color: $stone-10;
+$input-x-pad : 0.5rem;
+
+
+$input-btn-border-width: 0.03125rem;
+$input-border-color: $white;
+$input-box-shadow:none;
+$input-border-radius:0;
+$input-focus-border-color: $ocean-dark ;
+$input-focus-box-shadow: none;
+
+$custom-select-focus-border-color: $input-focus-border-color;
+$custom-select-focus-box-shadow: $input-focus-box-shadow;
+$custom-select-border-radius: 0;
+
+$custom-control-indicator-size:       1.25rem;
+$custom-control-indicator-bg:         $white;
+$custom-control-indicator-active-color:$stone-7;
+$custom-control-indicator-active-bg: $white;
+$custom-control-indicator-checked-color:      $stone-7 ;
+$custom-control-indicator-checked-bg:         $white;
+$custom-control-indicator-active-color:      $stone-7;
+$custom-control-indicator-box-shadow: inset 0.1rem 0.1rem 3px 1px rgba(0,0,0,0.1);
+$custom-control-indicator-focus-box-shadow: 0 0 0 1px $body-bg, 0 0 0 3px $sky;
+
+$custom-checkbox-indicator-border-radius: 0;
+
+
+//Dropdowns
+$dropdown-spacer: 1.625rem; // 10px / 16px
+$dropdown-padding-y: 0;
+$dropdown-border-width: 0;
+$dropdown-box-shadow: -4px 4px 12px 0px rgba(0,0,0,0.4);
+// Nav
+$navbar-padding-x:0rem;
+$navbar-padding-y:1.25rem; // (70px - 30px(login button height)) / 2 then convert to rem
+
+$navbar-brand-padding-y:0;
+
+$nav-link-padding-y:  1.6875rem;
+$nav-tabs-link-active-bg: $stone-white;
+$nav-tabs-border-color:$stone-white;
+$nav-tabs-border-radius: 0;
+$nav-tabs-link-active-border-color:$stone-white;
+
+//Popovers
+$popover-bg:$sky;
+$popover-border-width: 0;
+$popover-box-shadow: -10px 10px 50px -5px rgba($ocean-dark,.5);
+$popover-body-color: $white;
+$popover-body-padding-x: 24px;
+$popover-body-padding-y: 24px;
+//Modals
+$modal-inner-padding: 20px;
+
+$modal-backdrop-bg: $ocean;
+$modal-backdrop-opacity: 0.8;
+$modal-header-border-width: 0;
+$modal-content-border-width:0;
+$modal-content-box-shadow-sm-up:none;
+$modal-content-box-shadow-xs:none;
+
+
+$modal-sm: 340px;

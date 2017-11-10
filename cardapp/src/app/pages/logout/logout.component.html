@@ -1,0 +1,9 @@
+<div class="text-center">
+  <app-loading *ngIf="logout?.inProgress()"></app-loading>
+
+  <div *ngIf="logout?.result">
+    <br/>Logout successful<br/><br/>
+    <button class="btn btn-primary logout" routerLink="/login">Login</button>
+  </div>
+
+</div>

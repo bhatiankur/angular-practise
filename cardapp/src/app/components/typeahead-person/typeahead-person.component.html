@@ -1,0 +1,30 @@
+<ng-template #rtComponent>
+  <div *ngFor="let p of matches">
+    <app-person-row [person]="p" (selectedPerson)="personSelected($event)" (deleted)="personDeleted($event)"></app-person-row>
+  </div>
+</ng-template>
+
+<div class="container col-12">
+    <div class="form-group row col-12">
+      <h4 class="col-3">
+        To Account
+      </h4>
+      <input [popover]="rtComponent" placement="bottom" class="col-3 form-control" placeholder="search saved accounts" id="typeahead-toAccount" type="text" [(ngModel)]="model" (ngModelChange)="triggerfilter($event)" />
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
