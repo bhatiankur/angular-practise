@@ -1,0 +1,13 @@
+<div [formGroup]="fg">
+  <input type="text" formControlName="mobileNumber" placeholder="enter phone number"/>
+</div>
+<div *ngIf="phoneNumber?.invalid && (phoneNumber?.dirty || phoneNumber?.touched)" class="alert alert-danger">
+  <div *ngIf="phoneNumber?.errors.required">
+    Phone Number is required.
+  </div>
+  <div *ngIf="phoneNumber?.errors.phoneNumberError">
+    Phone Number is not correct.
+  </div>
+</div>
+
+{{ phoneNumber.value }}
