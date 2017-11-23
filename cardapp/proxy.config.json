@@ -1,7 +1,0 @@
-{
-  "/waiv-service/json/v1/api/*": {
-      "target": "http://localhost:9080",
-      "secure": false,
-      "loglevel": "debug"
-  }
-}
